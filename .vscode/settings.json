@@ -1,0 +1,7 @@
+{
+<<<<<<< HEAD
+  "python.pythonPath": "${workspaceFolder}/venv/bin/python"
+=======
+  "python.linting.pylintEnabled": false
+>>>>>>> d8ab19e06269cfffc7d0147a25d59a63aa6b1f28
+}
