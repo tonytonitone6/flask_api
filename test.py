@@ -8,9 +8,21 @@ create_table = "CREATE TABLE users (id int, username text, password text)"
 cursor.execute(create_table)
 
 user = (1, 'stan', 'test123')
-insert_query = "INSER INTO users VALUES (?, ?, ?)"
+insert_query = "INSERT INTO users VALUES (?, ?, ?)"
 
 cursor.execute(insert_query, user)
+
+users = [
+  (2, 'test', 'asd'),
+  (2, 'test123', 'asdwd')
+]
+
+cursor.executemany(insert_query, users)
+
+select_query = "SELECT * FROM users"
+print(cursor.execute(select_query))
+for row in cursor.execute(select_query):
+  print(row)
 
 connection.commit()
 
