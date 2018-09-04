@@ -25,13 +25,14 @@ class User:
         return user
 
     @classmethod
-    def find_by_id(cls, _id):
+    def find_by_id(cls, id):
         connection = sqlite3.connect('data.db')
         cursor = connection.cursor()
 
         query = "SELECT * FROM users WHERE id=?"
         result = cursor.execute(query, (id, ))
         row = result.fetchone()
+        print(row)
         if row:
             # (row[0], row[1], row[2]) => (*row) 變成一組參數傳遞
             user = cls(*row)
@@ -51,6 +52,10 @@ class UserRegister(Resource):
 
     def post(self):
         data = UserRegister.parser.parse_args()
+
+        if User.find_by_username(data['username']) is not None:
+            return {"message": "username is exist", "success": False}, 400
+
         connection = sqlite3.connect('data.db')
         cursor = connection.cursor()
 
